@@ -17,6 +17,7 @@ CREATE TABLE `rawdata` (
 `NestUpdated` timestamp NOT NULL,
 `NestCurrentKelvin` numeric(7,3) NOT NULL,
 `NestTargetKelvin` numeric(7,3) NOT NULL,
+`NestTimeToTarget` numeric(15) NOT NULL,
 `NestHumidity` tinyint unsigned NOT NULL,
 `NestHeating` tinyint unsigned NOT NULL,
 `NestPostal_code` char(10) NOT NULL,

@@ -22,7 +22,8 @@ $infos = $nest->getDeviceInfo();
 printf("<h1>Device Info</h1>");
 printf("<br>Last connection = %s\n", $infos->network->last_connection);
 printf("<br>Mode = %s\n",$infos->current_state->mode);
-printf("<br>Target temp = %s\n",$infos->target->temperature[0]);
+printf("<br>Target temp = %s\n",$infos->target->temperature);
+printf("<br>Time to target temp = %s\n",$infos->target->time_to_target);
 printf("<br>Current temp = %s\n",$infos->current_state->temperature);
 printf("<br>Current Humidity = %s\n",$infos->current_state->humidity);
 printf("<br>Heating = %s\n",($infos->current_state->heat== 1 ? 1 : 0));
@@ -72,7 +73,7 @@ if ($CelOrFahr =="C")
     printf("<br>Outside Temp Max: %s\n",$weather->main->temp_max - 273.15);
     
     // Convert NEST device temp values to Kelvin for storing in database
-    $NestTargetTempKelvin = ($infos->target->temperature[0] + 273.15);
+    $NestTargetTempKelvin = ($infos->target->temperature + 273.15);
     $NestCurrentTempKelvin = ($infos->current_state->temperature + 273.15);
 
     
@@ -84,11 +85,11 @@ if ($CelOrFahr =="C")
     printf("<br>Outside Temp Max: %s\n",$weather->main->temp_max );
 
     // Convert NEST device temp values to Kelvin for storing in database
-    $NestTargetTempKelvin = (((( $infos->target->temperature[0] - 32)*5)/9)+273.15);
+    $NestTargetTempKelvin = (((( $infos->target->temperature - 32)*5)/9)+273.15);
     $NestCurrentTempKelvin = (((($infos->current_state->temperature - 32)*5)/9)+273.15);
     
 }
-printf("<br>BBBTarget temp = %s\n",$infos->target->temperature[0]);
+printf("<br>BBBTarget temp = %s\n",$infos->target->temperature);
 printf("<br>BBBCurrent temp = %s\n",$infos->current_state->temperature);
 
 printf("<br> Converted Target Temp to Kelvin: %s\n", $NestTargetTempKelvin);
@@ -140,6 +141,7 @@ try {
       'NestUpdated'         => print_r( $infos->network->last_connection, true),
       'NestCurrentKelvin'   => $NestCurrentTempKelvin,
       'NestTargetKelvin'    => $NestTargetTempKelvin,
+      'NestTimeToTarget'    => print_r( $infos->target->time_to_target,true ),
       'NestHumidity'        => print_r( $infos->current_state->humidity, true),
       'NestHeating'         => print_r( $infos->current_state->mode, true),
       'NestPostal_code'     => print_r( $locations[0]->postal_code, true),
@@ -170,17 +172,18 @@ try {
     }
         
     if ($stmt = $db->res->prepare("INSERT INTO rawdata( timestamp, NestName, NestUpdated, NestCurrentKelvin, " 
-             . "NestTargetKelvin, NestHumidity, NestHeating, NestPostal_code, NestCountry, NestAway, WeatherMain, "
+             . "NestTargetKelvin, NestTimeToTarget, NestHumidity, NestHeating, NestPostal_code, NestCountry, NestAway, WeatherMain, "
              . "WeatherDescription, WeatherTempKelvin, WeatherHumidity, WeatherTempMinKelvin, WeatherTempMaxKelvin, "
              . "WeatherPressure, WeatherWindspeed, WeatherWinddeg, WeatherCityName) "
-             . "VALUES( ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"))
+             . "VALUES( ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"))
      {
-        $stmt->bind_param('sssiiiississiiiiiiis', 
+        $stmt->bind_param('sssiiiiississiiiiiiis', 
             $NestData['timestamp'],
             $NestData['NestName'],
             $NestData['NestUpdated' ],
             $NestData['NestCurrentKelvin'],
             $NestData['NestTargetKelvin'],
+            $NestData['NestTimeToTarget'],
             $NestData['NestHumidity'],
             $NestData['NestHeating'],
             $NestData['NestPostal_code'],

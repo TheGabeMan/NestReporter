@@ -10,6 +10,8 @@
     if (!mysqli_query($con,$sql))
       { die('Error: ' . mysqli_error($con)); }
     $result = mysqli_query($con,$sql);
+    
+    $ticker = 0;
 ?>
 
 <table>
@@ -18,15 +20,30 @@
     <?php
     while ($row = mysqli_fetch_array($result)) 
     { 
-        ?>
+      /*  ?>
         <tr>
-            <td><?php echo $row['timestamp']; $time[] = $row['timestamp'];  ?></td>
-            <td><?php echo $row['NestCurrentKelvin']; $Current[] = intval($row['NestCurrentKelvin'])-273.15; ?></td>
-            <td><?php echo $row['NestTargetKelvin']; $Target[] = $row['NestTargetKelvin']; ?></td>
+            <td><?php echo $row['timestamp']  ?></td>
+            <td><?php echo $row['NestCurrentKelvin'] ?></td>
+            <td><?php echo $row['NestTargetKelvin'];  ?></td>
         </tr>
     
         <?php
-    }
+       * 
+       */
+        $ticker++;
+        $TimeStamp[] = $ticker;
+        $Current[] = intval($row['NestCurrentKelvin']-273.15 );
+        $Target[] = intval( $row['NestTargetKelvin'] -273.15 );
+        
+        /*
+         * If Outside temperature was 0 Kelvin, then we haven't read the data correctly when fetching.
+         * Therefore I now check for a zero value and replace it with 
+         */
+        if( $row['WeatherTempKelvin'] <> 0)
+        {
+            $OutSide[] = intval( $row['WeatherTempKelvin'] -273.15 );
+        }else{ $OutSide[] = 0; }
+    }  
     mysqli_close($con);
     
     ?>
@@ -35,15 +52,16 @@
 
 
 <?php 
-    print_r($Current);
-    $pc = new C_PhpChartX(array($Current),'basic_chart');
-    // $pc = new C_PhpChartX(array(array(11, 9, 5, 12, 14)),'basic_chart');
+    $pc = new C_PhpChartX(array($Current, $Target),'basic_chart');
+    $pc->set_animate(true);
+    $pc->set_title(array('text'=>'Last 24hrs'));
+    $pc->set_xaxes(array('xaxis'=>array(
+                                'borderWidth'=>2,
+                                'borderColor'=>'#999999',
+                                'tickOptions'=>array('showGridline'=>false),
+                                'numberTicks'=> 10,
+				'ticks'=>$TimeStamp)
+		 ));    
+
     $pc->draw();
-
-
-/* 
- ___chart1= $.jqplot("__chart1", [["293.000","293.000","293.000","293.000","293.000","293.000","293.000","294.000","294.000","294.000","294.000","294.000","294.000","294.000","294.000","294.000","294.000","294.000","294.000","294.000","295.000",
- "295.000","295.000","295.000","295.000","295.000","295.000","295.000","295.000","295.000"]], ___chart1_plot_properties);
-
-*/
 ?>
