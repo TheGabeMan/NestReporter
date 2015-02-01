@@ -8,6 +8,7 @@
     
 ?>
 <!DOCTYPE html> 
+<meta charset="utf-8">
 <html>
  <?php
     // Let's find out what values were send through GET
@@ -26,11 +27,11 @@
             $footer_include = 'nest-footer.php';
             break;
 
-        case "n0201":
-            // Page n0201 = Search nail polish page;
+        case "n0002":
+            // Page n0002 = D3 test
             $top_include = 'nest-top.php';
             $banner_include = 'nest-banner.php';
-            $body_include = 'nest-n0201.php';
+            $body_include = 'nest-n0002.php';
             $footer_include = 'nest-footer.php';
             break;
 
