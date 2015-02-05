@@ -3,11 +3,18 @@
 require 'inc/config.php';
 require 'inc/class.db.php';
 require 'nest-api-master/nest.class.php';
+require 'inc/basic-functions.php';
 
 define('USERNAME', $config['nest_user']);
 define('PASSWORD', $config['nest_pass']);
 
 date_default_timezone_set($config['local_tz']);
+
+/*
+ * Let's first check if we're online
+ */
+
+CheckIfOnline($config['nest_user']);
 
 $nest = new Nest();
 
@@ -177,7 +184,7 @@ try {
              . "WeatherPressure, WeatherWindspeed, WeatherWinddeg, WeatherCityName) "
              . "VALUES( ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"))
      {
-        $stmt->bind_param('sssiiiiississiiiiiiis', 
+        $stmt->bind_param('sssiiiisssissiiiiiiis', 
             $NestData['timestamp'],
             $NestData['NestName'],
             $NestData['NestUpdated' ],

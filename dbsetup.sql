@@ -37,3 +37,12 @@ CREATE TABLE `rawdata` (
   UNIQUE KEY `timestamp` (`timestamp`)
 )ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+USE nest;
+CREATE TABLE `ConnectionLog` (
+`timestamp` timestamp NOT NULL,
+`url01` numeric(1) NOT NULL,
+`url02` numeric(1) NOT NULL,
+`url03` numeric(1) NOT NULL,
+  PRIMARY KEY (`timestamp`),
+  UNIQUE KEY `timestamp` (`timestamp`)
+)ENGINE=MyISAM DEFAULT CHARSET=latin1;

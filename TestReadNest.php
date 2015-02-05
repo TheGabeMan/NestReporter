@@ -105,3 +105,21 @@ $date = date("Y-m-d H:i:s");
 printf("<br> Tijdstip: %s\n", $date);
 
 ?>
+<script type="text/javascript">
+    TimeToTarget = new Date(<?php printf($infos->target->time_to_target); ?> *1000) // .toString();
+    alert( TimeToTarget);
+    today = new Date();
+    alert( today );
+    diff = TimeToTarget - today;
+    alert( diff );
+    
+    var msec = diff;
+    var hh = Math.floor(msec / 1000 / 60 / 60);
+    msec -= hh * 1000 * 60 * 60;
+    var mm = Math.floor(msec / 1000 / 60);
+    msec -= mm * 1000 * 60;
+    var ss = Math.floor(msec / 1000);
+    msec -= ss * 1000;
+    alert( hh );
+    alert( mm );
+</script>
