@@ -13,7 +13,8 @@
     $ChartData = array();
     foreach($results as $result) 
     { 
-        $ChartData[] = array( $result['timestamp'], (int)$result['NestCurrentKelvin'] - 273.15,(int)$result['NestTargetKelvin'] -273.15, (int)$result['NestHeating'] );
+        // Although officially 1 Kelvin = -273.15 C, we're using - 273C otherwise all C degrees would be xx.85
+        $ChartData[] = array( $result['timestamp'], (int)$result['NestCurrentKelvin'] - 273,(int)$result['NestTargetKelvin'] -273, (int)$result['NestHeating'] );
         // $ChartData[] = array( $result['timestamp'], (int)$result['NestCurrentKelvin'],(int)$result['NestTargetKelvin'],(int)$result['WeatherTempKelvin']);
     }
     $ChartData = json_encode($ChartData);

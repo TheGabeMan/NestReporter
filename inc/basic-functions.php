@@ -78,8 +78,8 @@ function CheckIfOnline($NestUser)
     }
     unset( $CheckURL);
 
-    print_r( $URLOKArray);
-    printf( $Online);
+    // print_r( $URLOKArray);
+    // printf( $Online);
 
     // If not all three URLs are reachable, we write to our SQL log
     if( $Online < 3){

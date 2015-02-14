@@ -1,5 +1,4 @@
 <?php
-    require_once("./phpChart/conf.php");
     require_once("./inc/basic-functions.php");
     
     if (mysqli_connect_errno())
@@ -52,16 +51,6 @@
 
 
 <?php 
-    $pc = new C_PhpChartX(array($Current, $Target),'basic_chart');
-    $pc->set_animate(true);
-    $pc->set_title(array('text'=>'Last 24hrs'));
-    $pc->set_xaxes(array('xaxis'=>array(
-                                'borderWidth'=>2,
-                                'borderColor'=>'#999999',
-                                'tickOptions'=>array('showGridline'=>false),
-                                'numberTicks'=> 10,
-				'ticks'=>$TimeStamp)
-		 ));    
 
-    $pc->draw();
+
 ?>
