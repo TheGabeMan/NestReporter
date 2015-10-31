@@ -14,8 +14,8 @@
     foreach($results as $result) 
     { 
         // Although officially 1 Kelvin = -273.15 C, we're using - 273C otherwise all C degrees would be xx.85
-        $ChartData[] = array( $result['timestamp'], (int)$result['NestCurrentKelvin'] - 273,(int)$result['NestTargetKelvin'] -273, (int)$result['NestHeating'] );
-        // $ChartData[] = array( $result['timestamp'], (int)$result['NestCurrentKelvin'],(int)$result['NestTargetKelvin'],(int)$result['WeatherTempKelvin']);
+        // $ChartData[] = array( $result['timestamp'], (int)$result['NestCurrentKelvin'] - 273,(int)$result['NestTargetKelvin'] -273, (int)$result['NestHeating'] );
+        $ChartData[] = array( $result['timestamp'], (int)$result['NestCurrentKelvin'] - 273,(int)$result['NestTargetKelvin'] - 273,(int)$result['WeatherTempKelvin'] - 273 );
     }
     $ChartData = json_encode($ChartData);
     
@@ -48,8 +48,8 @@
           data.addColumn('string', 'timestamp');
           data.addColumn('number', 'Real Temp');
           data.addColumn('number', 'Target Temp');
-          // data.addColumn('number','Outside Temp');
-          data.addColumn('number', 'Heat ON');
+          data.addColumn('number', 'Outside Temp');
+          // data.addColumn('number', 'Heat ON');
           
           // alert( <?php echo json_encode($ChartData); ?>);
           
