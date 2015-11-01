@@ -10,6 +10,8 @@ define('PASSWORD', $config['nest_pass']);
 
 date_default_timezone_set($config['local_tz']);
 
+// printf("\nNest insert.php\n");
+
 /*
  * Let's first check if we're online
  */
@@ -18,17 +20,19 @@ date_default_timezone_set($config['local_tz']);
 
 $nest = new Nest();
 
-printf("\nNest uitvoer");
+
 /*
  * Get the data we  want to use
  */
 $infos = $nest->getDeviceInfo();
-print_r($infos);
+// print_r($infos);
 
 
 // Current date and time
 $date = date("Y-m-d H:i:s");
-$logRow = $date . "," . $infos->network->last_connection . "," . $infos->current_state->mode;
+printf("\n" . $date . "\n");
+
+$logRow = $date . "," . $infos->network->last_connection;
 
 /*
  * How to find your City ID on OpenWeatherMap.org: http://openweathermap.org/find?q=
@@ -40,6 +44,27 @@ $json = file_get_contents($jsonurl);
 $weather = json_decode($json);
 $logRow = $logRow . "," . $weather->name . "," . $weather->weather[0]->main . "," . $weather->weather[0]->description;
 
+
+/*
+ * There is a difference in the object returned depending on the state of Away.
+ * When [current_state]->auto_away or [current_state]->manual_away = 1, the [target] section changes
+ * away = 1 --->  [target]->temperature->Array [0] en Array[1]
+ * away = 0 --->  [target]->temperature = 18
+ */
+
+if( $infos->current_state->auto_away==1 or $infos->current_state->manual_away==1 )
+{
+    printf("\nAway status is 1 \n");
+    $TargetTemp = $infos->target->temperature[0];
+} else {
+    printf("\nAway status is 0 \n");
+    $TargetTemp = $infos->target->temperature;
+}
+printf("\n TargetTemp = ");
+printf($TargetTemp);
+printf("\n");
+
+
 /*
  * - Temperatures read from the NEST device are in either Celcius or Fahrenheit, depending on user setting
  * - Temperatures read from OpenWeatherMaps are in Kelvin
@@ -49,12 +74,11 @@ $logRow = $logRow . "," . $weather->name . "," . $weather->weather[0]->main . ",
 
 // Is this NEST set to Celcius of Fahrenheit?
 $CelOrFahr = $nest->getDeviceTemperatureScale();
-
 if ($CelOrFahr =="C")
 {
     // Convert NEST device temp values to Kelvin for storing in database
     // Although officially 1 Kelvin = -273.15 C, we're using - 273C otherwise all C degrees would be xx.85
-    $NestTargetTempKelvin = ($infos->target->temperature + 273);
+    $NestTargetTempKelvin = ($TargetTemp + 273);
     $NestCurrentTempKelvin = ($infos->current_state->temperature + 273);
 
     
@@ -62,14 +86,12 @@ if ($CelOrFahr =="C")
 {
     // Convert NEST device temp values to Kelvin for storing in database
     // Although officially 1 Kelvin = -273.15 C, we're using - 273C otherwise all C degrees would be xx.85
-    $NestTargetTempKelvin = (((( $infos->target->temperature - 32)*5)/9)+273);
+    $NestTargetTempKelvin = (((( $TargetTemp - 32)*5)/9)+273);
     $NestCurrentTempKelvin = (((($infos->current_state->temperature - 32)*5)/9)+273);
     
 }
 
-
 $logRow = $logRow . ", TargetTemp = " . $NestTargetTempKelvin . ", CurrentTemp = " . $NestCurrentTempKelvin;
-
 
 try {
     
@@ -94,13 +116,18 @@ try {
       'WeatherTempMaxKelvin'=> print_r( $weather->main->temp_max, true),
       'WeatherPressure'     => print_r( $weather->main->pressure, true),
       'WeatherWindspeed'    => print_r( $weather->wind->speed, true),
-      'WeatherCityName'     => print_r( $weather->name, true)
+      'WeatherCityName'     => print_r( $weather->name, true),
+      'WeatherCloudiness'   => print_r( $weather->clouds->all, true),
+      'WeatherSunRise'      => print_r( $weather->sys->sunrise, true),
+      'WeatherSunSet'       => print_r( $weather->sys->sunset, true)
   );
   
-    printf("\nNest Data = ");
-    print_r( $NestData);
-    printf("\nHeater on or off: ");
-    printf($infos->current_state->heat==1?1:0);
+ 
+  
+    // printf("\nNest Data = ");
+    // print_r( $NestData);
+    // printf("\nHeater on or off: ");
+    // printf($infos->current_state->heat==1?1:0);
  
     $db = new DB($config);
     /* check connection */
@@ -111,16 +138,16 @@ try {
         printf("\nConnected to the database !!!\n");
     }
     
-    if ($stmt = $db->res->prepare("INSERT INTO rawdata( timestamp, NestName, NestUpdated, NestCurrentKelvin, "     // 4
-         . "NestTargetKelvin, NestTimeToTarget, NestHumidity, NestHeating, NestPostal_code, NestCountry, NestAutoAway, NestManualAway, WeatherMain, "  // 13
-         . "WeatherDescription, WeatherTempKelvin, WeatherHumidity, WeatherTempMinKelvin, WeatherTempMaxKelvin, "   // 18
-         . "WeatherPressure, WeatherWindspeed, WeatherCityName)"  // 21
-         . "VALUES( ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"))
+    if ($stmt = $db->res->prepare("INSERT INTO rawdata( timestamp, NestName, NestUpdated, NestCurrentKelvin, "     
+         . "NestTargetKelvin, NestTimeToTarget, NestHumidity, NestHeating, NestPostal_code, NestCountry, NestAutoAway, NestManualAway, WeatherMain, "  
+         . "WeatherDescription, WeatherTempKelvin, WeatherHumidity, WeatherTempMinKelvin, WeatherTempMaxKelvin, "   
+         . "WeatherPressure, WeatherWindspeed, WeatherCityName, WeatherCloudiness, WeatherSunRise, WeatherSunSet )"  // 24
+         . "VALUES( ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"))
     
     
      {
-        printf("\nIf true");
-        $stmt->bind_param('sssiiiisssiissiiiiiis', 
+        // printf("\nIf true");
+        $stmt->bind_param('sssiiiiissiissiiiiiisiii', 
             $NestData['timestamp'],
             $NestData['NestName'],
             $NestData['NestUpdated' ],
@@ -141,7 +168,10 @@ try {
             $NestData['WeatherTempMaxKelvin'],
             $NestData['WeatherPressure'],
             $NestData['WeatherWindspeed'],
-            $NestData['WeatherCityName']
+            $NestData['WeatherCityName'],
+            $NestData['WeatherCloudiness'],
+            $NestData['WeatherSunRise'],
+            $NestData['WeatherSunSet']
         );
         
         $stmt->execute();
@@ -161,13 +191,7 @@ try {
      else
      {
 
-         printf("\nIf false");
          print_r(error_get_last());
-         printf("Error Nr.\n", mysqli_stmt_errno($stmt));
-         printf("Error  \n",mysqli_stmt_error($stmt));
-         print_r($stmt);
-         printf($stmt);
-         printf("\nEnd false");
      };
      printf("\nLog row = ");
      printf($logRow);
