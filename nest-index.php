@@ -7,7 +7,12 @@
         <div class ="white-space-block" style="height:5px;"></div>
         <a href="index.php?page=n0002"><div class="nails-menu-buttons" style="width:90%;margin-left: auto;margin-right: auto;display: block;">Graph NEST via D3</div></a>
         <div class ="white-space-block" style="height:5px;"></div>
-        <a href="index.php?page=n0401"><div class="nails-menu-buttons" style="width:90%;margin-left: auto;margin-right: auto;display: block;">Add polish</div></a>
+        <a href="index.php?page=n0003"><div class="nails-menu-buttons" style="width:90%;margin-left: auto;margin-right: auto;display: block;">Big Graph</div></a>
         <div class ="white-space-block" style="height:5px;"></div>
+        <a href="index.php?page=n0004"><div class="nails-menu-buttons" style="width:90%;margin-left: auto;margin-right: auto;display: block;">7 day view</div></a>
+        <div class ="white-space-block" style="height:5px;"></div>
+        <a href="index.php?page=n0005"><div class="nails-menu-buttons" style="width:90%;margin-left: auto;margin-right: auto;display: block;">Select day view</div></a>
+        <div class ="white-space-block" style="height:5px;"></div>
+
         <a href="index.php?page=n0501"><div class="nails-menu-buttons" style="width:90%;margin-left: auto;margin-right: auto;display: block;">Add review</div></a>
     </div>

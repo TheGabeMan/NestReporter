@@ -24,24 +24,59 @@ $nest = new Nest();
 /*
  * Get the data we  want to use
  */
-$infos = $nest->getDeviceInfo();
-// print_r($infos);
-
+printf("\nInfos is leeg.");
+$InfosTry = 1;
+While( empty($infos) )
+{
+    printf("\nGet info try: $InfosTry");
+    $infos = $nest->getDeviceInfo();
+    $InfosTry=+1;
+    if( $InfosTry == 10)
+    {
+        printf("\nExit Infos try $InfosTry \n");
+        break;
+    }
+    
+}
 
 // Current date and time
 $date = date("Y-m-d H:i:s");
-printf("\n" . $date . "\n");
+printf("\n" . $date );
 
 $logRow = $date . "," . $infos->network->last_connection;
 
 /*
  * How to find your City ID on OpenWeatherMap.org: http://openweathermap.org/find?q=
- */
+ *
+ * 
+ * Need to put this in an include as function, to be able to call it more often. Sometimes zero values are returned.
+ *  */
 
-$locations = $nest->getUserLocations();
-$jsonurl = "http://api.openweathermap.org/data/2.5/weather?q=" . $locations[0]->postal_code . "," . $locations[0]->country . "&APPID=c10eca5ef3de05f43173a50f922831d8";
-$json = file_get_contents($jsonurl);
-$weather = json_decode($json);
+$WeatherTry = 1;
+printf("\nWeather first try.");
+while ( empty($weather->name))
+{
+    $locations = $nest->getUserLocations();
+    $jsonurl = "http://api.openweathermap.org/data/2.5/weather?q=" . $locations[0]->postal_code . "," . $locations[0]->country . "&APPID=c10eca5ef3de05f43173a50f922831d8";
+    $json = file_get_contents($jsonurl);
+    $weather = json_decode($json);
+    if( empty($weather->name) )
+    {
+        printf("\nWeather returned empty " . $WeatherTry );
+        sleep(10);
+        
+        $WeatherTry =+1;
+        If( $WeatherTry == 10){
+            printf("\nTried $WeatherTry times, now exiting.");
+            break;
+        }
+        // Now get latest record from SQL DB and import those values and write them again to not mess up the graphs / stats
+    }
+}   
+printf("\nWeather exited with ");
+print_r( $weather->name );
+printf(" Einde weather name");        
+
 $logRow = $logRow . "," . $weather->name . "," . $weather->weather[0]->main . "," . $weather->weather[0]->description;
 
 
@@ -54,15 +89,13 @@ $logRow = $logRow . "," . $weather->name . "," . $weather->weather[0]->main . ",
 
 if( $infos->current_state->auto_away==1 or $infos->current_state->manual_away==1 )
 {
-    printf("\nAway status is 1 \n");
+    printf("\nAway status is 1");
     $TargetTemp = $infos->target->temperature[0];
 } else {
-    printf("\nAway status is 0 \n");
+    printf("\nAway status is 0");
     $TargetTemp = $infos->target->temperature;
 }
-printf("\n TargetTemp = ");
-printf($TargetTemp);
-printf("\n");
+printf("\n TargetTemp = " . $TargetTemp);
 
 
 /*
@@ -123,19 +156,13 @@ try {
   );
   
  
-  
-    // printf("\nNest Data = ");
-    // print_r( $NestData);
-    // printf("\nHeater on or off: ");
-    // printf($infos->current_state->heat==1?1:0);
- 
     $db = new DB($config);
     /* check connection */
     if (mysqli_connect_errno()) {
-        printf("\nConnect failed: %s\n", mysqli_connect_error());
+        printf("\nConnect failed: %s", mysqli_connect_error());
         exit();
     }  else {
-        printf("\nConnected to the database !!!\n");
+        printf("\nConnected to the database !!!");
     }
     
     if ($stmt = $db->res->prepare("INSERT INTO rawdata( timestamp, NestName, NestUpdated, NestCurrentKelvin, "     
@@ -175,11 +202,11 @@ try {
         );
         
         $stmt->execute();
-        printf("\n%d Row inserted.\n", $stmt->affected_rows);
+        printf("\n%d Row inserted. ", $stmt->affected_rows);
         if(mysqli_stmt_errno($stmt) > 0)
         {
-            printf("Error Nr.\n", mysqli_stmt_errno($stmt));
-            printf("Error  \n",mysqli_stmt_error($stmt));
+            printf("\nError Nr. ", mysqli_stmt_errno($stmt));
+            printf("\nError ",mysqli_stmt_error($stmt));
             $logRow = $logRow . "," . $stmt->affected_rows . "," . mysqli_stmt_error($stmt) . "\n";
         }
         else
@@ -193,13 +220,13 @@ try {
 
          print_r(error_get_last());
      };
-     printf("\nLog row = ");
-     printf($logRow);
-     printf("\nEnd Log\n");
+     printf("\nLog row = " . $logRow );
      
 } catch (Exception $e) {
   $errors[] = ("DB connection error! <code>" . $e->getMessage() . "</code>.");
 }
 
+$date = date("Y-m-d H:i:s");
+printf("\nEnd Log " . $date);
 
 ?>

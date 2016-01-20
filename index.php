@@ -34,6 +34,31 @@
             $body_include = 'nest-n0002.php';
             $footer_include = 'nest-footer.php';
             break;
+        
+        case "n0003":
+            // Page n0003 = Big Graph
+            $top_include = 'nest-top.php';
+            $banner_include = 'nest-banner.php';
+            $body_include = 'nest-n0003.php';
+            $footer_include = 'nest-footer.php';
+            break;
+
+        case "n0004":
+            // Page n0004 = Big Graph
+            $top_include = 'nest-top.php';
+            $banner_include = 'nest-banner.php';
+            $body_include = 'nest-n0004.php';
+            $footer_include = 'nest-footer.php';
+            break;
+
+        case "n0005":
+            // Page n0005 = Graph between dates
+            $top_include = 'nest-top.php';
+            $banner_include = 'nest-banner.php';
+            $body_include = 'nest-n0005.php';
+            $footer_include = 'nest-footer.php';
+            break;
+        
 
         default:
             // If no matching case found
