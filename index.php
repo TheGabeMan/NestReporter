@@ -6,8 +6,10 @@
     include_once 'inc/open-database.php';
     // include_once 'inc/load-cookie.php';
     
+    
 ?>
 <!DOCTYPE html> 
+<script type="text/javascript" src="inc/dhtmlxcalendar.js"></script>
 <meta charset="utf-8">
 <html>
  <?php

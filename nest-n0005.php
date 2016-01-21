@@ -31,6 +31,15 @@
 
 ?>
 
+<input type="text" id="calendar">
+<input type="text" id="calendar2">
+
+
+<script>
+    var myCalendar = new dhtmlXCalendarObject(["calendar","calendar2"]);
+
+</script>
+ 
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
    
