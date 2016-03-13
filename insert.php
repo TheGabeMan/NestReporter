@@ -8,6 +8,9 @@ require 'inc/basic-functions.php';
 define('USERNAME', $config['nest_user']);
 define('PASSWORD', $config['nest_pass']);
 
+$logdate = date("Y-m-d H:i:s");
+printf("\n$logdate ***** New pull of date *****");
+
 date_default_timezone_set($config['local_tz']);
 
 // printf("\nNest insert.php\n");
@@ -24,16 +27,19 @@ $nest = new Nest();
 /*
  * Get the data we  want to use
  */
-printf("\nInfos is leeg.");
+$logdate = date("Y-m-d H:i:s");
+printf("\n$logdate Infos is leeg.");
 $InfosTry = 1;
 While( empty($infos) )
 {
-    printf("\nGet info try: $InfosTry");
+    $logdate = date("Y-m-d H:i:s");
+    printf("\n$logdate Get info try: $InfosTry");
     $infos = $nest->getDeviceInfo();
     $InfosTry=+1;
     if( $InfosTry == 10)
     {
-        printf("\nExit Infos try $InfosTry \n");
+        $logdate = date("Y-m-d H:i:s");
+        printf("\n$logdate Exit Infos try $InfosTry");
         break;
     }
     
@@ -41,8 +47,6 @@ While( empty($infos) )
 
 // Current date and time
 $date = date("Y-m-d H:i:s");
-printf("\n" . $date );
-
 $logRow = $date . "," . $infos->network->last_connection;
 
 /*
@@ -53,7 +57,8 @@ $logRow = $date . "," . $infos->network->last_connection;
  *  */
 
 $WeatherTry = 1;
-printf("\nWeather first try.");
+$logdate = date("Y-m-d H:i:s");
+printf("\n$logdate Weather fetch first try for openweathermap.org.");
 while ( empty($weather->name))
 {
     $locations = $nest->getUserLocations();
@@ -62,20 +67,23 @@ while ( empty($weather->name))
     $weather = json_decode($json);
     if( empty($weather->name) )
     {
-        printf("\nWeather returned empty " . $WeatherTry );
+        $logdate = date("Y-m-d H:i:s");
+        printf("\n$logdate Weather fetch returned empty " . $WeatherTry );
         sleep(10);
         
         $WeatherTry =+1;
         If( $WeatherTry == 10){
-            printf("\nTried $WeatherTry times, now exiting.");
+            $logdate = date("Y-m-d H:i:s");
+            printf("\n$logdate Tried $WeatherTry times, now giving up.");
             break;
         }
         // Now get latest record from SQL DB and import those values and write them again to not mess up the graphs / stats
     }
 }   
-printf("\nWeather exited with ");
+$logdate = date("Y-m-d H:i:s");
+printf("\n$logdate Weather fetch exited with ");
 print_r( $weather->name );
-printf(" Einde weather name");        
+printf("\n$logdate End of weather name");        
 
 $logRow = $logRow . "," . $weather->name . "," . $weather->weather[0]->main . "," . $weather->weather[0]->description;
 
@@ -89,13 +97,16 @@ $logRow = $logRow . "," . $weather->name . "," . $weather->weather[0]->main . ",
 
 if( $infos->current_state->auto_away==1 or $infos->current_state->manual_away==1 )
 {
-    printf("\nAway status is 1");
+    $logdate = date("Y-m-d H:i:s");
+    printf("\n$logdate Away status is 1");
     $TargetTemp = $infos->target->temperature[0];
 } else {
-    printf("\nAway status is 0");
+    $logdate = date("Y-m-d H:i:s");
+    printf("\n$logdate Away status is 0");
     $TargetTemp = $infos->target->temperature;
 }
-printf("\n TargetTemp = " . $TargetTemp);
+$logdate = date("Y-m-d H:i:s");
+printf("\n$logdate TargetTemp = " . $TargetTemp);
 
 
 /*
@@ -159,10 +170,12 @@ try {
     $db = new DB($config);
     /* check connection */
     if (mysqli_connect_errno()) {
-        printf("\nConnect failed: %s", mysqli_connect_error());
+        $logdate = date("Y-m-d H:i:s");
+        printf("\n$logdate Connect failed: %s", mysqli_connect_error());
         exit();
     }  else {
-        printf("\nConnected to the database !!!");
+        $logdate = date("Y-m-d H:i:s");
+        printf("\n$logdate Connected to the database.");
     }
     
     if ($stmt = $db->res->prepare("INSERT INTO rawdata( timestamp, NestName, NestUpdated, NestCurrentKelvin, "     
@@ -202,11 +215,13 @@ try {
         );
         
         $stmt->execute();
-        printf("\n%d Row inserted. ", $stmt->affected_rows);
+        $logdate = date("Y-m-d H:i:s");
+        printf("\n$logdate %d Row inserted. ", $stmt->affected_rows);
         if(mysqli_stmt_errno($stmt) > 0)
         {
-            printf("\nError Nr. ", mysqli_stmt_errno($stmt));
-            printf("\nError ",mysqli_stmt_error($stmt));
+            $logdate = date("Y-m-d H:i:s");
+            printf("\n$logdate Error Nr. ", mysqli_stmt_errno($stmt));
+            printf("\n$logdate Error ",mysqli_stmt_error($stmt));
             $logRow = $logRow . "," . $stmt->affected_rows . "," . mysqli_stmt_error($stmt) . "\n";
         }
         else
@@ -220,13 +235,15 @@ try {
 
          print_r(error_get_last());
      };
-     printf("\nLog row = " . $logRow );
+     $logdate = date("Y-m-d H:i:s");
+     printf("\n$logdate Log row = " . $logRow );
      
 } catch (Exception $e) {
   $errors[] = ("DB connection error! <code>" . $e->getMessage() . "</code>.");
 }
 
-$date = date("Y-m-d H:i:s");
-printf("\nEnd Log " . $date);
+$logdate = date("Y-m-d H:i:s");
+printf("\n$logdate ***** End pull of date ***** \n");
+
 
 ?>

@@ -31,12 +31,19 @@
 
 ?>
 
-<input type="text" id="calendar">
-<input type="text" id="calendar2">
+Start date:<input type="text" id="StartDate">
+<span>
+    <img id="calendar_icon_StartDate" src="images/calendar_in_input_icon.png" border="0">
+</span>
+End date:<input type="text" id="EndDate">
+<span>
+    <img id="calendar_icon_EndDate" src="images/calendar_in_input_icon.png" border="0">
+</span>
 
 
 <script>
-    var myCalendar = new dhtmlXCalendarObject(["calendar","calendar2"]);
+    // dhtmlXCalendarObject was defined in index.php
+    var myCalendar = new dhtmlXCalendarObject([{input:"StartDate",button:"calendar_icon_StartDate"},{input:"EndDate",button:"calendar_icon_EndDate"}]);
 
 </script>
  
