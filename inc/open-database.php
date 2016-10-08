@@ -1,12 +1,15 @@
 <?php
 
-    // ----------- Database connection ----------//
-    $mysql_db_hostname = "127.0.0.1";
-    $mysql_db_user = "nest_user";
-    $mysql_db_password = "9qqTMiJqU3xCtqGcxHYp";
-    $mysql_db_database = "nest";  
-    $con = mysqli_connect($mysql_db_hostname, $mysql_db_user, $mysql_db_password) 
-                       or die("Failed to connect to MySQL: " . mysqli_connect_error());
-    mysqli_select_db($con, $mysql_db_database) or die("Could not select database" . mysqli_connect_error());
-   
+# Making this DockerCompatible.
+# db_ip is the name of the docker container in which MySQL runs
+
+$config = array('db_ip' => 'GabeThermDBv001',
+       		'db_user' => 'root',
+       		'db_pass' => 'L@mpMyG@B',
+       		'db_name' => 'nest',
+       		'nest_user' => 'thegabeman@gmail.com',
+       		'nest_pass' => 'N35tG@b',
+       		'local_tz' => 'Europe/Amsterdam' // see http://php.net/manual/en/timezones.php
+       		);
+
 ?>
