@@ -3,6 +3,7 @@
 # Making this DockerCompatible.
 # db_ip is the name of the docker container in which MySQL runs
 # Insert Nest
+# Third
 
 $config = array('db_ip' => 'GabeThermDBv001',
        		'db_user' => 'root',
