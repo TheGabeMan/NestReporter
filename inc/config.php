@@ -1,6 +1,6 @@
 <?php
 
-$config = array('db_ip' => 'GabeThermDBv001', 
+$config = array('db_ip' => 'GabeThermDB', 
 		'db_user' => 'root',
 		'db_pass' => 'L@mpMyG@B',
 		'db_name' => 'nest',
