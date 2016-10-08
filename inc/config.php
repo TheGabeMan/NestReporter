@@ -1,11 +1,11 @@
 <?php
 
-$config = array('db_ip' => '127.0.0.1', 
-		'db_user' => '<dbusername>',
-		'db_pass' => '<dbuserpassword>',
+$config = array('db_ip' => 'GabeThermDBv001', 
+		'db_user' => 'root',
+		'db_pass' => 'L@mpMyG@B',
 		'db_name' => 'nest',
-		'nest_user' => '<nest email address>',
-		'nest_pass' => '<nest password>',
+		'nest_user' => 'thegabeman@gmail.com',
+		'nest_pass' => 'N35tG@b',
 		'local_tz' => 'Europe/Amsterdam' // see http://php.net/manual/en/timezones.php
 		);
 
