@@ -5,8 +5,10 @@ require 'inc/class.db.php';
 require 'nest-api-master/nest.class.php';
 require 'inc/basic-functions.php';
 
-define('USERNAME', $config['nest_user']);
-define('PASSWORD', $config['nest_pass']);
+# define('USERNAME', $config['nest_user']);
+# define('PASSWORD', $config['nest_pass']);
+define('USERNAME', getenv('nest_user'));
+define('PASSWORD', getenv('nest_pass'));
 
 $logdate = date("Y-m-d H:i:s");
 printf("\n$logdate ***** New pull of date *****");
@@ -18,8 +20,6 @@ date_default_timezone_set($config['local_tz']);
 /*
  * Let's first check if we're online
  */
-
-// CheckIfOnline($config['nest_user']);
 
 $nest = new Nest();
 
