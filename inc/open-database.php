@@ -4,7 +4,7 @@
        # db_hostname is the name of the docker container in which MySQL runs
  
     // ----------- Database connection ----------//
-    $mysql_db_hostname = "GabeThermDBv001";
+    $mysql_db_hostname = "GabeThermDB";
     $mysql_db_user = "root";
     $mysql_db_password = "L@mpMyG@B";
     $mysql_db_database = "nest";  
