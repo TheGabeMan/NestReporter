@@ -26,7 +26,7 @@
             $top_include = 'tstat-top.php';
             $banner_include = 'nest-banner.php';
             $body_include = 'nest-n0001.php';
-            $footer_include = 'nest-footer.php';
+            $footer_include = 'tstat-footer.php';
             break;
 
         case "n0002":
@@ -34,7 +34,7 @@
             $top_include = 'tstat-top.php';
             $banner_include = 'nest-banner.php';
             $body_include = 'nest-n0002.php';
-            $footer_include = 'nest-footer.php';
+            $footer_include = 'tstat-footer.php';
             break;
         
         case "n0003":
@@ -42,7 +42,7 @@
             $top_include = 'tstat-top.php';
             $banner_include = 'nest-banner.php';
             $body_include = 'nest-n0003.php';
-            $footer_include = 'nest-footer.php';
+            $footer_include = 'tstat-footer.php';
             break;
 
         case "n0004":
@@ -50,7 +50,7 @@
             $top_include = 'tstat-top.php';
             $banner_include = 'nest-banner.php';
             $body_include = 'nest-n0004.php';
-            $footer_include = 'nest-footer.php';
+            $footer_include = 'tstat-footer.php';
             break;
 
         case "n0005":
@@ -58,7 +58,7 @@
             $top_include = 'tstat-top.php';
             $banner_include = 'nest-banner.php';
             $body_include = 'nest-n0005.php';
-            $footer_include = 'nest-footer.php';
+            $footer_include = 'tstat-footer.php';
             break;
         
 
@@ -66,8 +66,8 @@
             // If no matching case found
             $top_include = 'tstat-top.php';
             $banner_include = 'nest-banner.php';
-            $body_include = 'nest-index.php';
-            $footer_include = 'nest-footer.php';
+            $body_include = 'tstat-index.php';
+            $footer_include = 'tstat-footer.php';
             break;
     }
   

@@ -8,3 +8,4 @@
     <a href="index.php?page=n0301"><div class="nest-footer-buttons" style="margin-right: 2px;">Browse</div></a>
     <a href="index.php?page=n0001"><div class="nest-footer-buttons" >About</div></a>
 </div>    
+    
