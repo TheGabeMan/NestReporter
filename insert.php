@@ -1,12 +1,13 @@
 <?php
 
-require 'inc/config.php';
+require 'inc/tstat-config.php';
 require 'inc/class.db.php';
 require 'nest-api-master/nest.class.php';
 require 'inc/basic-functions.php';
 
 # define('USERNAME', $config['nest_user']);
 # define('PASSWORD', $config['nest_pass']);
+
 define('USERNAME', getenv('nest_user'));
 define('PASSWORD', getenv('nest_pass'));
 

@@ -1,0 +1,368 @@
+/* 
+    Document   : nest-style
+    Created on : Jan 29, 2015
+    Author     : Gabrie
+*/
+
+body{
+    font-family: 'Lato', sans-serif !important;
+    font-weight: 100 !important;
+
+}
+
+h1,h2, p, span {
+    font-family: 'Lato', sans-serif !important;
+    font-weight: 100 !important;
+    }
+
+h1,h2 {
+        font-weight: bold;
+    }
+    
+
+#top{
+        position: fixed;
+        top: 0;
+        width: 100%;
+}
+    
+#footer{        
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+}
+
+.tstat-header-buttons {
+	-moz-box-shadow:inset 0px 1px 0px 0px #c1ed9c;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #c1ed9c;
+	box-shadow:inset 0px 1px 0px 0px #c1ed9c;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #9dce2c), color-stop(1, #8cb82b) );
+	background:-moz-linear-gradient( center top, #9dce2c 5%, #8cb82b 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#9dce2c', endColorstr='#8cb82b');
+	background-color:#9dce2c;
+	-webkit-border-top-left-radius:15px;
+	-moz-border-radius-topleft:15px;
+	border-top-left-radius:15px;
+	-webkit-border-top-right-radius:15px;
+	-moz-border-radius-topright:15px;
+	border-top-right-radius:15px;
+	-webkit-border-bottom-right-radius:0px;
+	-moz-border-radius-bottomright:0px;
+	border-bottom-right-radius:0px;
+	-webkit-border-bottom-left-radius:0px;
+	-moz-border-radius-bottomleft:0px;
+	border-bottom-left-radius:0px;
+	text-indent:0;
+	border:1px solid #83c41a;
+	display:inline-block;
+	color:#ffffff;
+        font-family: 'Lato', sans-serif;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	height:60px;
+	line-height:60px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #689324;
+        width: 70px;
+        text-decoration:none;
+}
+        
+/* To remove the change in color of links */
+.tstat-header-buttons:link{
+        text-decoration:none;
+        color:#ffffff;
+	font-style:normal;
+
+}
+.tstat-header-buttons:visited{
+        text-decoration:none;
+}
+
+.tstat-header-buttons:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8cb82b), color-stop(1, #9dce2c) );
+	background:-moz-linear-gradient( center top, #8cb82b 5%, #9dce2c 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#8cb82b', endColorstr='#9dce2c');
+	background-color:#8cb82b;
+        text-decoration:underline;
+}
+
+.tstat-header-buttons:active {
+	position:relative;
+	top:1px;
+        text-decoration:underline;
+}
+
+/*
+If Screen is iPhone Portrait, then the width of buttons should not exceed 70px
+.nest-footer-buttons { max-width: 70px;}
+*/
+
+
+.button 
+    {
+     -moz-box-shadow:inset 0px 1px 0px 0px #caefab;
+     -webkit-box-shadow:inset 0px 1px 0px 0px #caefab;
+     box-shadow:inset 0px 1px 0px 0px #caefab;
+     background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #77d42a), color-stop(1, #5cb811) );
+     background:-moz-linear-gradient( center top, #77d42a 5%, #5cb811 100% );
+     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#77d42a', endColorstr='#5cb811');
+     background-color:#77d42a;
+     -webkit-border-top-left-radius:37px;
+     -moz-border-radius-topleft:37px;
+     border-top-left-radius:37px;
+     -webkit-border-top-right-radius:0px;
+     -moz-border-radius-topright:0px;
+     border-top-right-radius:0px;
+     -webkit-border-bottom-right-radius:37px;
+     -moz-border-radius-bottomright:37px;
+     border-bottom-right-radius:37px;
+     -webkit-border-bottom-left-radius:0px;
+     -moz-border-radius-bottomleft:0px;
+     border-bottom-left-radius:0px;
+     border:1px solid #268a16;
+     display:inline-block;
+     color:#306108;
+     font-family: 'Lato', sans-serif;
+     font-size:15px;
+     font-weight:bold;
+     font-style:normal;
+     height:50px;
+     line-height:50px;
+     width:100px;
+     text-indent:0;
+     text-decoration:none;
+     text-align:center;
+     text-shadow:1px 1px 0px #aade7c;
+    }
+
+.button:hover 
+    {
+     background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #5cb811), color-stop(1, #77d42a) );
+     background:-moz-linear-gradient( center top, #5cb811 5%, #77d42a 100% );
+     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#5cb811', endColorstr='#77d42a');
+     background-color:#5cb811;
+    }
+
+.button:active 
+    {
+     position:relative;
+     top:1px;
+    }
+    
+.nest-banner 
+    {
+     -moz-box-shadow:inset 0px 1px 0px 0px #caefab;
+     -webkit-box-shadow:inset 0px 1px 0px 0px #caefab;
+     box-shadow:inset 0px 1px 0px 0px #caefab;
+     background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #77d42a), color-stop(1, #5cb811) );
+     background:-moz-linear-gradient( center top, #77d42a 5%, #5cb811 100% );
+     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#77d42a', endColorstr='#5cb811');
+     background-color:#77d42a;
+     -webkit-border-top-left-radius:37px;
+     -moz-border-radius-topleft:37px;
+     border-top-left-radius:37px;
+     -webkit-border-top-right-radius:0px;
+     -moz-border-radius-topright:0px;
+     border-top-right-radius:0px;
+     -webkit-border-bottom-right-radius:37px;
+     -moz-border-radius-bottomright:37px;
+     border-bottom-right-radius:37px;
+     -webkit-border-bottom-left-radius:0px;
+     -moz-border-radius-bottomleft:0px;
+     border-bottom-left-radius:0px;
+     text-indent:0;
+     border:1px solid #268a16;
+     display:inline-block;
+     color:#306108;
+     /* 
+     font-family:Arial;
+     */
+     font-family: 'Lato', sans-serif;
+     font-size:15px;
+     font-weight:bold;
+     font-style:normal;
+     height:50px;
+     line-height:50px;
+     text-decoration:none;
+     text-align:center;
+     text-shadow:1px 1px 0px #aade7c;
+    }
+
+.nest-banner:hover 
+    {
+     background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #5cb811), color-stop(1, #77d42a) );
+     background:-moz-linear-gradient( center top, #5cb811 5%, #77d42a 100% );
+     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#5cb811', endColorstr='#77d42a');
+     background-color:#5cb811;
+    }
+
+.nest-banner:active 
+    {
+     position:relative;
+     top:1px;
+    }
+    
+.nest-top {
+	-moz-box-shadow:inset 0px 1px 0px 0px #c1ed9c;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #c1ed9c;
+	box-shadow:inset 0px 1px 0px 0px #c1ed9c;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #9dce2c), color-stop(1, #8cb82b) );
+	background:-moz-linear-gradient( center top, #9dce2c 5%, #8cb82b 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#9dce2c', endColorstr='#8cb82b');
+	background-color:#9dce2c;
+	-webkit-border-top-left-radius:0px;
+	-moz-border-radius-topleft:0px;
+	border-top-left-radius:0px;
+	-webkit-border-top-right-radius:0px;
+	-moz-border-radius-topright:0px;
+	border-top-right-radius:0px;
+	-webkit-border-bottom-right-radius:0px;
+	-moz-border-radius-bottomright:0px;
+	border-bottom-right-radius:0px;
+	-webkit-border-bottom-left-radius:0px;
+	-moz-border-radius-bottomleft:0px;
+	border-bottom-left-radius:0px;
+	text-indent:0;
+	border:1px solid #83c41a;
+	display:inline-block;
+	color:#ffffff;
+        font-family: 'Lato', sans-serif;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	height:30px;
+	line-height:30px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #689324;
+        width: 100%;
+}
+.nest-top:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8cb82b), color-stop(1, #9dce2c) );
+	background:-moz-linear-gradient( center top, #8cb82b 5%, #9dce2c 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#8cb82b', endColorstr='#9dce2c');
+	background-color:#8cb82b;
+}.nest-top:active {
+	position:relative;
+	top:1px;
+}
+
+.nest-menu-buttons {
+	-moz-box-shadow:inset 0px 1px 0px 0px #fce2c1;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #fce2c1;
+	box-shadow:inset 0px 1px 0px 0px #fce2c1;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffc477), color-stop(1, #fb9e25) );
+	background:-moz-linear-gradient( center top, #ffc477 5%, #fb9e25 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffc477', endColorstr='#fb9e25');
+	background-color:#ffc477;
+	-webkit-border-top-left-radius:20px;
+	-moz-border-radius-topleft:20px;
+	border-top-left-radius:20px;
+	-webkit-border-top-right-radius:20px;
+	-moz-border-radius-topright:20px;
+	border-top-right-radius:20px;
+	-webkit-border-bottom-right-radius:20px;
+	-moz-border-radius-bottomright:20px;
+	border-bottom-right-radius:20px;
+	-webkit-border-bottom-left-radius:20px;
+	-moz-border-radius-bottomleft:20px;
+	border-bottom-left-radius:20px;
+	text-indent:0;
+	border:1px solid #eeb44f;
+	display:block;
+	color:#ffffff;
+        font-family: 'Lato', sans-serif;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	height:40px;
+	line-height:40px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #cc9f52;
+}
+.nest-menu-buttons:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fb9e25), color-stop(1, #ffc477) );
+	background:-moz-linear-gradient( center top, #fb9e25 5%, #ffc477 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fb9e25', endColorstr='#ffc477');
+	background-color:#fb9e25;
+}.nest-menu-buttons:active {
+	position:relative;
+	top:1px;
+}
+
+
+
+.white-space-block {
+	background-color:transparent;
+	-webkit-border-top-left-radius:0px;
+	-moz-border-radius-topleft:0px;
+	border-top-left-radius:0px;
+	-webkit-border-top-right-radius:0px;
+	-moz-border-radius-topright:0px;
+	border-top-right-radius:0px;
+	-webkit-border-bottom-right-radius:0px;
+	-moz-border-radius-bottomright:0px;
+	border-bottom-right-radius:0px;
+	-webkit-border-bottom-left-radius:0px;
+	-moz-border-radius-bottomleft:0px;
+	border-bottom-left-radius:0px;
+	border:1px;
+	display:inline-block;
+        height:50px;
+	width:100%;
+}
+        
+        
+/* This button was generated using CSSButtonGenerator.com */
+
+.n0400AddResults{
+    width: 300px;
+    height: 200px;
+    box-shadow: 10px 10px 5px #888888;
+    background-color:#8cb82b;
+ 
+}
+
+
+#nest-item-box{
+    width: 300px;
+    height: 200px;
+    background: red;
+    -moz-box-shadow:    5px 5px 5px 6px #ccc;
+    -webkit-box-shadow: 5px 5px 5px 6px #ccc;
+    box-shadow:         5px 5px 5px 6px #ccc;
+}
+
+#nest-item-picture-box{
+    float: left;
+    width: 80px;
+    height: 80px;
+    background: blue;
+
+}
+
+#nest-item-picture{
+    width: 46px;
+    height: 46px;
+    margin-top: 17px;
+    margin-right: auto;
+    margin-left: auto;
+    left: 50%;
+}
+
+#nest-item-name{
+    float: left;
+    width: 150px;
+    height: 80px;
+    background: green;
+    text-align: center;
+}
+
+#nest-item-list{
+        width: 230px;
+    height: 120px;
+    background: yellow;
+}
