@@ -18,7 +18,14 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 
-<!-- <link rel="stylesheet" type="text/css" href="css/tstat-style.css"> -->
+<!-- Chartjs.org script libraries -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.js" integrity="sha256-LyocQFwqh0JslfDVDlJqJamo/nJP/5rAQdYtCAtB4hU=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.min.js" integrity="sha256-1uH5nQ+1cUZEU9YOfMzc9rapsWyuGtvKPpvKN9xDgug=" crossorigin="anonymous"></script>
+
+<!-- Deze zijn waarschijnlijk niet nodig ivm de aanwezigheid van de bundle vorige stuk 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.js" integrity="sha256-matqc7CRptNWuATphiL4aVwn2YFBle16YV/AI5bYc70=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.min.js" integrity="sha256-w8BXa9KXx+nmhO9N4hupvlLy+cAtqEarnB40DVJx2xA=" crossorigin="anonymous"></script>
+-->
 
 
 <!-- Kan deze ook al weg???? -->

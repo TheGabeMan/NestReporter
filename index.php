@@ -25,7 +25,7 @@
             // Page n0001 = index page;
             $top_include = 'tstat-top.php';
             $banner_include = 'nest-banner.php';
-            $body_include = 'nest-n0001.php';
+            $body_include = 'tstat-n0001.php';
             $footer_include = 'tstat-footer.php';
             break;
 

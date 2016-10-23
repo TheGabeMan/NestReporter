@@ -1,20 +1,22 @@
 <?php
 
+global $config;
 $config = array('db_ip' => '127.0.0.1',  // Container value: GabeThermDB
 		'db_user' => 'root',
 		'db_pass' => 'L@mpMyG@B',
 		'db_name' => 'nest',
 		# 'nest_user' => 'thegabeman@gmail.com',   // <-- Now done through environment setting for container
 		# 'nest_pass' => 'N35tG@b',     // <-- Now done through environment setting for container
-		'local_tz' => 'Europe/Amsterdam' // see http://php.net/manual/en/timezones.php
+		'local_tz' => 'Europe/Amsterdam' , // see http://php.net/manual/en/timezones.php
+                'CorF' => 'C'
 		);
 
 
-    define('DBHOSTNAME', getenv('dbhostname'));
-    // DEBUG ==> printf("\n" . $config['db_ip'] . " Array config 0");
+define('DBHOSTNAME', getenv('dbhostname'));
+// DEBUG ==> printf("\n" . $config['db_ip'] . " Array config 0");
     
-    # Making this DockerCompatible.
-    # db_hostname is the name of the docker container in which MySQL runs
+# Making this DockerCompatible.
+# db_hostname is the name of the docker container in which MySQL runs
  
     // ----------- Database connection ----------//
     $mysql_db_hostname = $config['db_ip'];

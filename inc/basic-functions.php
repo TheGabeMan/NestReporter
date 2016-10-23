@@ -109,4 +109,26 @@ function WriteToLogDB($URLOKArray)
     
     mysqli_close($con);
 }
+
+// Function k_to_h is converting from Kelvin to Human format, either Fahrenheit or Celcius
+function k_to_h($temp) {
+    global $config;
+    if( $config['CorF'] == 'C')
+        { return k_to_c($temp); }
+    else
+        { return k_to_f($temp); }
+}
+
+function k_to_f($temp) {
+    if ( !is_numeric($temp) ) { return false; }
+    return round((($temp - 273.15) * 1.8) + 32);
+}
+
+function k_to_c($temp) {
+	if ( !is_numeric($temp) ) { return false; }
+	return round(($temp - 273.15));
+}
+
+
 ?>
+
